@@ -9,14 +9,18 @@ public class Pelicula {
 	private String nombre;
 	private Categoria genero;
 	
+	private static int contador =0;
+	
 	
 	public Pelicula() {
-		
-		
+		contador++; // GENERAMOS ID AUMATICO CADA VEZ QUE QUEREMOS AGREGAR UNA PELICULA
+		id = contador;
+		this.nombre = "Sin Nombre";
 	}
 	
-	public Pelicula(int id, String nombre, Categoria genero) {
-		this.id = id;
+	public Pelicula(String nombre, Categoria genero) {
+		contador++;
+		this.id = contador;
 		this.nombre = nombre;
 		this.genero = genero;
 	}
