@@ -108,6 +108,8 @@ public class pAgregarPeliculas extends JPanel {
 		});
 	}
 		
-
+	public static ArrayList<Pelicula> getListaPeliculas() {
+		return listaPeliculas;
+	}
 	
 }

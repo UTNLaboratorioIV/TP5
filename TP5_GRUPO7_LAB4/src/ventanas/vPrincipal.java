@@ -42,7 +42,7 @@ public class vPrincipal extends JFrame {
 			}
 		});
 		mnPeliculas.add(mnItAgregarPeliculas);
-				
+		
 		JMenuItem mnItListarPeliculas = new JMenuItem("Listar");
 		mnItListarPeliculas.setFont(new Font("Verdana", Font.PLAIN, 12));
 		
@@ -51,6 +51,16 @@ public class vPrincipal extends JFrame {
 			}
 		});
 		mnPeliculas.add(mnItListarPeliculas);
+		
+		mnItListarPeliculas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.removeAll();
+				pListarPeliculas panel = new pListarPeliculas();
+				contentPane.add(panel);
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
