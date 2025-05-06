@@ -2,13 +2,19 @@ package ventanas;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import peliculas.Categoria;
+import peliculas.Pelicula;
+
 import javax.swing.JComboBox;
 
 import java.awt.Font;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class pAgregarPeliculas extends JPanel {
@@ -18,6 +24,10 @@ public class pAgregarPeliculas extends JPanel {
 	private JTextField txtNombre;
 	private JComboBox<String> cbGenero;
 	private JButton btnAceptar;
+	
+	//declaro la lista
+	private static ArrayList<Pelicula> listaPeliculas = new ArrayList<>();
+
 
 	public pAgregarPeliculas() {
 		dibujarControles();
@@ -62,14 +72,42 @@ public class pAgregarPeliculas extends JPanel {
 		cbGenero.setBounds(155, 130, 110, 20);
 		add(cbGenero);
 		
+		// Agrego los géneros al ComboBox
+		cbGenero.addItem("Seleccione un género");
+		cbGenero.addItem("Terror");
+		cbGenero.addItem("Acción");
+		cbGenero.addItem("Suspenso");
+		cbGenero.addItem("Romántica");
+
+		//Función en btnAceptr para agregar a la lista validando
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnAceptar.setFont(fuenteComun);
 		btnAceptar.setBounds(85, 165, 89, 25);
 		add(btnAceptar);
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nombre = txtNombre.getText().trim();
+				String generoSeleccionado = (String) cbGenero.getSelectedItem();
 
+				if (nombre.isEmpty() || generoSeleccionado.equals("Seleccione un género")) {
+					JOptionPane.showMessageDialog(null, "Por favor ingrese el nombre de la película y seleccione un género válido.", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				int nuevoId = listaPeliculas.size() + 1;
+				Categoria categoria = new Categoria(nuevoId, generoSeleccionado);
+				Pelicula pelicula = new Pelicula(nuevoId, nombre, categoria);
+
+				listaPeliculas.add(pelicula);
+
+				JOptionPane.showMessageDialog(null, "Película agregada correctamente.");
+
+				txtNombre.setText("");
+				cbGenero.setSelectedIndex(0);
+			}
+		});
 	}
+		
+
+	
 }
